@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sms-mediator</artifactId>
+        <groupId>fi.netorek</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sms-mediator-system-webapp</artifactId>
+    <packaging>war</packaging>
+    <name>SMS Mediator :: Webapp</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>fi.netorek</groupId>
+            <artifactId>message-receiver</artifactId>
+            <version>${version}</version>
+            <classifier>classes</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>fi.netorek</groupId>
+            <artifactId>message-routing</artifactId>
+            <version>${version}</version>
+            <classifier>classes</classifier>
+        </dependency>
+    </dependencies>
+
+</project>
