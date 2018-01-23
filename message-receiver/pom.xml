@@ -11,7 +11,7 @@
 
     <artifactId>message-receiver</artifactId>
     <packaging>war</packaging>
-    <name>SMS Mediator :: Message Receiver</name>
+    <name>Sms Mediator :: Message Receiver</name>
 
     <dependencies>
         <dependency>

@@ -11,7 +11,7 @@
 
     <artifactId>message-routing</artifactId>
     <packaging>war</packaging>
-    <name>SMS Mediator :: Message Routing</name>
+    <name>Sms Mediator :: Message Routing</name>
 
     <dependencies>
         <dependency>
