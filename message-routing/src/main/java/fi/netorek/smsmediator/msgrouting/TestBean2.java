@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestBean {
+public class TestBean2 {
     @Value("${test2.value}")
     private int value;
 
