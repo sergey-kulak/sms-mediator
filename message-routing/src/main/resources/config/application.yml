@@ -1,0 +1,18 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+smsmediator:
+  inbound-queue: testSmsQueue
+
+  # routing
+  routing:
+    K1:
+      tenant: k1-tenant
+      app: K1 app
+    K2:
+      tenant: k2-tenant
+      app: K2 app

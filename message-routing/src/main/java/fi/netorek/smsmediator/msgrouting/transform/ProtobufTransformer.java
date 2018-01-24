@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.msgrouting.eip;
+package fi.netorek.smsmediator.msgrouting.transform;
 
 import org.springframework.integration.transformer.Transformer;
 import org.springframework.messaging.Message;

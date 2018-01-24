@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.msgrouting.eip;
+package fi.netorek.smsmediator.msgrouting.transform;
 
 import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;

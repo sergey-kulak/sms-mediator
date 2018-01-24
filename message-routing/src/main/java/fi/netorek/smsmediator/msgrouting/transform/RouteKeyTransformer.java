@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.msgrouting.eip;
+package fi.netorek.smsmediator.msgrouting.transform;
 
 import org.springframework.integration.transformer.Transformer;
 import org.springframework.messaging.Message;
@@ -19,11 +19,16 @@ public class RouteKeyTransformer implements Transformer {
     public Message<?> transform(Message<?> message) {
         SmsText smsText = smsTextParser.parse(message.getPayload().toString());
         TenantRoute tenantRoute = tenantRouteResolver.resolve(smsText.getRouteKey());
-        TenantAppMessage appMessage = new TenantAppMessage(smsText, tenantRoute);
+        TenantAppMessage appMessage = buildTenantAppMessage(smsText, tenantRoute);
 
         return MessageBuilder.withPayload(appMessage)
                 .copyHeaders(message.getHeaders())
                 .build();
+    }
+
+    private TenantAppMessage buildTenantAppMessage(SmsText smsText, TenantRoute tenantRoute) {
+        return new TenantAppMessage(smsText.getRouteKey(), smsText.getText(),
+                tenantRoute.getTenant(), tenantRoute.getApplication());
     }
 
 

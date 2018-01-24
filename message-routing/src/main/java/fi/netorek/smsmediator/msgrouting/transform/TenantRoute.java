@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.msgrouting.eip;
+package fi.netorek.smsmediator.msgrouting.transform;
 
 public class TenantRoute {
     private String tenant;

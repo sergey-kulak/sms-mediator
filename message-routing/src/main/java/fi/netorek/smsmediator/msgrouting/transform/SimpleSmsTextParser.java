@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.msgrouting.eip;
+package fi.netorek.smsmediator.msgrouting.transform;
 
 import fi.netorek.smsmediator.msgrouting.exception.IncorrectSmsTextFormatException;
 
