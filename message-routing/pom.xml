@@ -15,6 +15,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>fi.netorek</groupId>
+            <artifactId>message-common</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
@@ -30,6 +36,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-integration</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.integration</groupId>
+            <artifactId>spring-integration-amqp</artifactId>
         </dependency>
     </dependencies>
 
