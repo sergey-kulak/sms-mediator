@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package tutorial;
+
+option java_package = "fi.netorek.smsmediator.proto";
+option java_outer_classname = "InboundMessage";
+
+message Message {
+  required string phoneNumber = 1;
+  required string body = 2;
+  required string origin = 3;
+}

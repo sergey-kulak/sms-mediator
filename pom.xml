@@ -17,6 +17,7 @@
     <name>Sms Mediator</name>
 
     <modules>
+        <module>message-common</module>
         <module>message-receiver</module>
         <module>message-routing</module>
         <module>webapp</module>
@@ -24,6 +25,11 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <protobuf.version>3.5.1</protobuf.version>
+        <protoc.path>d:\\Vihta\\protoc-3.5.1-win32\\bin\\protoc</protoc.path>
+        <spring.boot.version>1.5.9.RELEASE</spring.boot.version>
+        <google.protobuf.version>3.5.1</google.protobuf.version>
+        <spring.rabbit.version>1.6.6.RELEASE</spring.rabbit.version>
         <lombok.version>1.16.20</lombok.version>
     </properties>
 

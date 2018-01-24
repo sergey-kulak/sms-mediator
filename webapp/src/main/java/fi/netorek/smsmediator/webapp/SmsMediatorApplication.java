@@ -22,8 +22,8 @@ public class SmsMediatorApplication {
     }
 
     public static void main(String[] args) {
-        Set<Class> applicaiotnClasses = AnnotationUtils.findAnnotatedClasses(BASE_PACKAGE, SpringBootApplication.class);
-        SpringApplication.run(applicaiotnClasses.toArray(), args);
+        Set<Class> applicationClasses = AnnotationUtils.findAnnotatedClasses(BASE_PACKAGE, SpringBootApplication.class);
+        SpringApplication.run(applicationClasses.toArray(), args);
     }
 
 }
