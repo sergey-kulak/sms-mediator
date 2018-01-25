@@ -15,7 +15,7 @@ import fi.netorek.smsmediator.msgrouting.exception.TenantRouteNotFoundException;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = TestConfiguration.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
-@TestPropertySource("/test-route-config.properties")
+@TestPropertySource("classpath:test-route-config.properties")
 public class SpringTenantRouteResolverTest {
     @Autowired
     private TenantRouteResolver tenantRouteResolver;
