@@ -21,16 +21,23 @@ public class RouteKeyTransformer implements Transformer {
         InboundMessage.Message payload = (InboundMessage.Message) message.getPayload();
         SmsText smsText = smsTextParser.parse(payload.getBody());
         TenantRoute tenantRoute = tenantRouteResolver.resolve(smsText.getRouteKey());
-        TenantAppMessage appMessage = buildTenantAppMessage(smsText, tenantRoute);
+        TenantAppMessage appMessage = buildTenantAppMessage(payload, smsText, tenantRoute);
 
         return MessageBuilder.withPayload(appMessage)
                 .copyHeaders(message.getHeaders())
                 .build();
     }
 
-    private TenantAppMessage buildTenantAppMessage(SmsText smsText, TenantRoute tenantRoute) {
-        return new TenantAppMessage(smsText.getRouteKey(), smsText.getText(),
-                tenantRoute.getTenant(), tenantRoute.getApplication());
+    private TenantAppMessage buildTenantAppMessage(InboundMessage.Message payload, SmsText smsText,
+                                                   TenantRoute tenantRoute) {
+        return TenantAppMessage.builder()
+                .phoneNumber(payload.getPhoneNumber())
+                .origin(payload.getOrigin())
+                .routeKey(smsText.getRouteKey())
+                .text(smsText.getText())
+                .tenant(tenantRoute.getTenant())
+                .applicationName(tenantRoute.getApplication())
+                .build();
     }
 
 
