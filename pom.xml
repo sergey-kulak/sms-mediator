@@ -30,6 +30,8 @@
         <protoc.path>${env.PROTOC_HOME}\bin\protoc</protoc.path>
         <spring.rabbit.version>1.6.6.RELEASE</spring.rabbit.version>
         <lombok.version>1.16.20</lombok.version>
+        <commons.lang3.version>3.7</commons.lang3.version>
+        <hamcrest.version>1.3</hamcrest.version>
     </properties>
 
     <dependencies>
@@ -47,6 +49,17 @@
                 <groupId>org.springframework.integration</groupId>
                 <artifactId>spring-integration-amqp</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>${hamcrest.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.msgrouting.transform;
+package fi.netorek.smsmediator.msgrouting.transform.route;
 
 import org.springframework.boot.bind.RelaxedPropertyResolver;
 import org.springframework.context.EnvironmentAware;
@@ -9,6 +9,7 @@ import fi.netorek.smsmediator.msgrouting.exception.TenantRouteNotFoundException;
 public class SpringTenantRouteResolver implements TenantRouteResolver, EnvironmentAware {
     private static final String TENANT_SUFFIX = ".tenant";
     private static final String APP_SUFFIX = ".app";
+
     private RelaxedPropertyResolver propertyResolver;
 
     @Override

@@ -1,10 +1,12 @@
-package fi.netorek.smsmediator.msgrouting.transform;
+package fi.netorek.smsmediator.msgrouting.transform.sms;
 
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import fi.netorek.smsmediator.msgrouting.exception.IncorrectSmsTextFormatException;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SimpleSmsTextParser;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SmsText;
 
 public class SimpleSmsTextParserTest {
     @Test

@@ -1,11 +1,10 @@
-package fi.netorek.smsmediator.msgrouting.transform;
+package fi.netorek.smsmediator.msgrouting.transform.route;
 
 public class TenantRoute {
     private String tenant;
     private String application;
 
     public TenantRoute(String tenant, String application) {
-        // TODO ASSerts
         this.tenant = tenant;
         this.application = application;
     }

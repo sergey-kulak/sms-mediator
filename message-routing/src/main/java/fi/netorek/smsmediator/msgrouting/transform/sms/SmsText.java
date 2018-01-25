@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.msgrouting.transform;
+package fi.netorek.smsmediator.msgrouting.transform.sms;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

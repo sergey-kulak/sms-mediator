@@ -1,16 +1,10 @@
 package fi.netorek.smsmediator.msgrouting.config;
 
-import java.io.IOException;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.context.IntegrationContextUtils;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -18,15 +12,14 @@ import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.dsl.amqp.Amqp;
 import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.MessageHandler;
 
 import fi.netorek.smsmediator.msgrouting.log.ErrorLogHandler;
 import fi.netorek.smsmediator.msgrouting.transform.ProtobufTransformer;
 import fi.netorek.smsmediator.msgrouting.transform.RouteKeyTransformer;
-import fi.netorek.smsmediator.msgrouting.transform.SimpleSmsTextParser;
-import fi.netorek.smsmediator.msgrouting.transform.SmsTextParser;
-import fi.netorek.smsmediator.msgrouting.transform.SpringTenantRouteResolver;
-import fi.netorek.smsmediator.msgrouting.transform.TenantRouteResolver;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SimpleSmsTextParser;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SmsTextParser;
+import fi.netorek.smsmediator.msgrouting.transform.route.SpringTenantRouteResolver;
+import fi.netorek.smsmediator.msgrouting.transform.route.TenantRouteResolver;
 import fi.netorek.smsmediator.msgrouting.log.SuccessTenantLogHandler;
 import fi.netorek.smsmediator.msgrouting.msg.TenantAppMessage;
 

@@ -5,6 +5,10 @@ import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 
 import fi.netorek.smsmediator.msgrouting.msg.TenantAppMessage;
+import fi.netorek.smsmediator.msgrouting.transform.route.TenantRoute;
+import fi.netorek.smsmediator.msgrouting.transform.route.TenantRouteResolver;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SmsText;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SmsTextParser;
 import fi.netorek.smsmediator.proto.InboundMessage;
 
 public class RouteKeyTransformer implements Transformer {
