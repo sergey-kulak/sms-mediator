@@ -1,0 +1,2 @@
+msg-receiver:
+  outbound-exchange: testSmsExchange

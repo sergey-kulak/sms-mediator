@@ -1,9 +1,16 @@
 package fi.netorek.smsmediator.msgrouting.config;
 
+import java.io.IOException;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.integration.annotation.IntegrationComponentScan;
 import org.springframework.integration.context.IntegrationContextUtils;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -25,7 +32,8 @@ import fi.netorek.smsmediator.msgrouting.msg.TenantAppMessage;
 
 @Configuration
 @IntegrationComponentScan
-public class IntegrationConfig {
+@PropertySource("classpath:/config/msg-routing.properties")
+public class RouteIntegrationConfig {
     @Value("${smsmediator.inbound-queue}")
     private String inboundQueueName;
 
