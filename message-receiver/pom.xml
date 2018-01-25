@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>fi.netorek</groupId>
-            <artifactId>message-common</artifactId>
+            <artifactId>sms-mediator-common</artifactId>
             <version>${version}</version>
         </dependency>
         <dependency>

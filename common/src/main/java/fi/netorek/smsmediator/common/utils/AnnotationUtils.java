@@ -1,4 +1,4 @@
-package fi.netorek.smsmediator.webapp.utils;
+package fi.netorek.smsmediator.common.utils;
 
 import java.lang.annotation.Annotation;
 import java.util.Set;

@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-import fi.netorek.smsmediator.webapp.utils.AnnotationUtils;
+import fi.netorek.smsmediator.common.utils.AnnotationUtils;
 
 @SpringBootApplication
 public class SmsMediatorApplication extends SpringBootServletInitializer {
