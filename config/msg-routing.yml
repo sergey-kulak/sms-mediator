@@ -4,8 +4,11 @@ smsmediator:
   # routing
   routing:
     K1:
-      tenant: k1-tenant
-      app: K1 app
+      tenant: k1-tenant-new
+      app: K1 app new
     K2:
       tenant: k2-tenant
       app: K2 app
+    K3:
+      tenant: k3-tenant
+      app: K3 app
