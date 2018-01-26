@@ -1,5 +1,6 @@
 package fi.netorek.smsmediator.msgrouting.msg;
 
+import com.google.i18n.phonenumbers.Phonenumber;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -8,7 +9,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class TenantAppMessage {
-    private String phoneNumber;
+    private Phonenumber.PhoneNumber phoneNumber;
     private String origin;
     private String routeKey;
     private String text;

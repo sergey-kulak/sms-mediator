@@ -17,7 +17,7 @@
         <dependency>
             <groupId>fi.netorek</groupId>
             <artifactId>sms-mediator-common</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -63,6 +63,11 @@
         <dependency>
             <groupId>org.springframework.integration</groupId>
             <artifactId>spring-integration-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>libphonenumber</artifactId>
+            <version>${libphonenumber.version}</version>
         </dependency>
     </dependencies>
 

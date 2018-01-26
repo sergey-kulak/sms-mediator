@@ -12,3 +12,6 @@ smsmediator:
     K3:
       tenant: k3-tenant
       app: K3 app
+    phone:
+      default:
+        region: FI

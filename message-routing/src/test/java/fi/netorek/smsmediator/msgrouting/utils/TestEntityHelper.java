@@ -14,7 +14,7 @@ public class TestEntityHelper {
 
     public static InboundMessage.Message buildInboundMessage(String body) {
         return InboundMessage.Message.newBuilder()
-                .setPhoneNumber(RandomStringUtils.random(10))
+                .setPhoneNumber("358" + RandomStringUtils.randomNumeric(9))
                 .setBody(body)
                 .setOrigin(RandomStringUtils.randomAlphabetic(5))
                 .build();

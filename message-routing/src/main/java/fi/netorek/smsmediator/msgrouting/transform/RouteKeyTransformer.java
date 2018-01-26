@@ -1,5 +1,7 @@
 package fi.netorek.smsmediator.msgrouting.transform;
 
+import com.google.i18n.phonenumbers.Phonenumber;
+import fi.netorek.smsmediator.msgrouting.transform.phone.PhoneNumberParser;
 import org.springframework.integration.transformer.Transformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -14,10 +16,12 @@ import fi.netorek.smsmediator.proto.InboundMessage;
 public class RouteKeyTransformer implements Transformer {
     private TenantRouteResolver tenantRouteResolver;
     private SmsTextParser smsTextParser;
+    private PhoneNumberParser phoneNumberParser;
 
-    public RouteKeyTransformer(SmsTextParser smsTextParser, TenantRouteResolver tenantRouteResolver) {
+    public RouteKeyTransformer(SmsTextParser smsTextParser, TenantRouteResolver tenantRouteResolver, PhoneNumberParser phoneNumberParser) {
         this.smsTextParser = smsTextParser;
         this.tenantRouteResolver = tenantRouteResolver;
+        this.phoneNumberParser = phoneNumberParser;
     }
 
     @Override
@@ -25,7 +29,8 @@ public class RouteKeyTransformer implements Transformer {
         InboundMessage.Message payload = (InboundMessage.Message) message.getPayload();
         SmsText smsText = smsTextParser.parse(payload.getBody());
         TenantRoute tenantRoute = tenantRouteResolver.resolve(smsText.getRouteKey());
-        TenantAppMessage appMessage = buildTenantAppMessage(payload, smsText, tenantRoute);
+        Phonenumber.PhoneNumber phoneNumber = phoneNumberParser.parse(payload.getPhoneNumber());
+        TenantAppMessage appMessage = buildTenantAppMessage(payload, smsText, tenantRoute, phoneNumber);
 
         return MessageBuilder.withPayload(appMessage)
                 .copyHeaders(message.getHeaders())
@@ -33,9 +38,9 @@ public class RouteKeyTransformer implements Transformer {
     }
 
     private TenantAppMessage buildTenantAppMessage(InboundMessage.Message payload, SmsText smsText,
-                                                   TenantRoute tenantRoute) {
+                                                   TenantRoute tenantRoute, Phonenumber.PhoneNumber phoneNumber) {
         return TenantAppMessage.builder()
-                .phoneNumber(payload.getPhoneNumber())
+                .phoneNumber(phoneNumber)
                 .origin(payload.getOrigin())
                 .routeKey(smsText.getRouteKey())
                 .text(smsText.getText())

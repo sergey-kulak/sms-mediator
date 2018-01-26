@@ -1,5 +1,7 @@
 package fi.netorek.smsmediator.msgrouting.config;
 
+import fi.netorek.smsmediator.msgrouting.transform.phone.PhoneNumberParser;
+import fi.netorek.smsmediator.msgrouting.transform.phone.PhoneNumberParserImpl;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -72,17 +74,22 @@ public class RouteIntegrationConfig {
 
     @Bean
     public RouteKeyTransformer routingKeyTransformer() {
-        return new RouteKeyTransformer(smsTextParser(), tenantRouteResolver());
+        return new RouteKeyTransformer(smsTextParser(), tenantRouteResolver(propertyResolverRouting()), phoneNumberParser(propertyResolverRouting()));
     }
 
     @Bean
-    public TenantRouteResolver tenantRouteResolver() {
-        return new SpringTenantRouteResolver();
+    public TenantRouteResolver tenantRouteResolver(PropertyResolverRouting propertyResolverRouting) {
+        return new SpringTenantRouteResolver(propertyResolverRouting);
     }
 
     @Bean
     public SmsTextParser smsTextParser() {
         return new SimpleSmsTextParser();
+    }
+
+    @Bean
+    public PhoneNumberParser phoneNumberParser(PropertyResolverRouting propertyResolverRouting) {
+        return new PhoneNumberParserImpl(propertyResolverRouting);
     }
 
     @Bean
@@ -93,6 +100,11 @@ public class RouteIntegrationConfig {
     @Bean
     public ErrorLogHandler errorLogHandler(){
         return new ErrorLogHandler();
+    }
+
+    @Bean
+    public PropertyResolverRouting propertyResolverRouting() {
+        return new PropertyResolverRouting();
     }
 
 }

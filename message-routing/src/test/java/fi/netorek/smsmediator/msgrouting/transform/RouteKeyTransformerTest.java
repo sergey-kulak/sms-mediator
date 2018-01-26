@@ -4,10 +4,14 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import fi.netorek.smsmediator.msgrouting.transform.phone.PhoneNumberParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -30,6 +34,8 @@ public class RouteKeyTransformerTest {
     private SmsTextParser smsTextParser = new SimpleSmsTextParser();
     @Mock
     private TenantRouteResolver tenantRouteResolver;
+    @Mock
+    private PhoneNumberParser phoneNumberParser;
     @InjectMocks
     private RouteKeyTransformer routeKeyTransformer;
 
@@ -44,14 +50,20 @@ public class RouteKeyTransformerTest {
         InboundMessage.Message message = TestEntityHelper.buildInboundMessage(smsBody);
 
         when(tenantRouteResolver.resolve(expectedRoutingKey)).thenReturn(new TenantRoute(expectedTenant, expectedApp));
+        try {
+            when(phoneNumberParser.parse(message.getPhoneNumber())).thenReturn(PhoneNumberUtil.getInstance().parse(message.getPhoneNumber(), "FI"));
+        } catch (NumberParseException e) {
+            fail();
+        }
         Message result = routeKeyTransformer.transform(TestEntityHelper.buildMessage(message));
 
         verify(smsTextParser, times(1)).parse(smsBody);
+        verify(phoneNumberParser, times(1)).parse(message.getPhoneNumber());
         verify(tenantRouteResolver, times(1)).resolve(expectedRoutingKey);
 
         TenantAppMessage resultPayload = (TenantAppMessage) result.getPayload();
         assertThat(resultPayload, allOf(
-                hasProperty("phoneNumber", is(message.getPhoneNumber())),
+                hasProperty("phoneNumber", hasProperty("nationalNumber", is(Long.parseLong(message.getPhoneNumber().substring(3))))),
                 hasProperty("origin", is(message.getOrigin())),
                 hasProperty("routeKey", is(expectedRoutingKey)),
                 hasProperty("text", is(expectedText)),
