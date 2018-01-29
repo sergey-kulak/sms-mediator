@@ -25,9 +25,6 @@ import fi.netorek.smsmediator.proto.TenantAppMessage;
 
 @Configuration
 @IntegrationComponentScan
-// Default module settings. Unfortunately PropertySource doesn't support yml file therefore .properties is used
-// but any value can be overridden by "outer" file including yml
-@PropertySource("classpath:/config/msg-routing.properties")
 public class RouteIntegrationConfig {
     @Value("${msg-routing.inbound-queue}")
     private String inboundQueueName;

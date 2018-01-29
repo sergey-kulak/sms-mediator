@@ -22,9 +22,6 @@ import fi.netorek.smsmediator.proto.InboundMessage;
 
 @Configuration
 @IntegrationComponentScan
-// Default module settings. Unfortunately PropertySource doesn't support yml file therefore .properties is used
-// but any value can be overridden by "outer" file including yml
-@PropertySource("classpath:/config/msg-receiver.properties")
 public class ReceiverIntegrationConfig {
     private static final String PARAM_PHONE_NUBER = "phonenumber";
     private static final String PARAM_BODY = "body";
