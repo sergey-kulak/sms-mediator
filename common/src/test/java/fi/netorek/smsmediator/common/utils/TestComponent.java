@@ -2,6 +2,6 @@ package fi.netorek.smsmediator.common.utils;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@TestAnnotation
 public class TestComponent {
 }

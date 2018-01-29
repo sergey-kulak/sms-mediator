@@ -1,7 +1,5 @@
 package fi.netorek.smsmediator.msgrouting.config;
 
-import fi.netorek.smsmediator.msgrouting.transform.phone.PhoneNumberParser;
-import fi.netorek.smsmediator.msgrouting.transform.phone.PhoneNumberParserImpl;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -16,21 +14,25 @@ import org.springframework.integration.dsl.channel.MessageChannels;
 import org.springframework.messaging.MessageChannel;
 
 import fi.netorek.smsmediator.msgrouting.log.ErrorLogHandler;
+import fi.netorek.smsmediator.msgrouting.log.SuccessTenantLogHandler;
 import fi.netorek.smsmediator.msgrouting.transform.ProtobufTransformer;
 import fi.netorek.smsmediator.msgrouting.transform.RouteKeyTransformer;
-import fi.netorek.smsmediator.msgrouting.transform.sms.SimpleSmsTextParser;
-import fi.netorek.smsmediator.msgrouting.transform.sms.SmsTextParser;
 import fi.netorek.smsmediator.msgrouting.transform.route.SpringTenantRouteResolver;
 import fi.netorek.smsmediator.msgrouting.transform.route.TenantRouteResolver;
-import fi.netorek.smsmediator.msgrouting.log.SuccessTenantLogHandler;
-import fi.netorek.smsmediator.msgrouting.msg.TenantAppMessage;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SimpleSmsTextParser;
+import fi.netorek.smsmediator.msgrouting.transform.sms.SmsTextParser;
+import fi.netorek.smsmediator.proto.TenantAppMessage;
 
 @Configuration
 @IntegrationComponentScan
+// Default module settings. Unfortunately PropertySource doesn't support yml file therefore .properties is used
+// but any value can be overridden by "outer" file including yml
 @PropertySource("classpath:/config/msg-routing.properties")
 public class RouteIntegrationConfig {
-    @Value("${smsmediator.inbound-queue}")
+    @Value("${msg-routing.inbound-queue}")
     private String inboundQueueName;
+    @Value("${msg-routing.default-phone-region}")
+    private String defaultPhoneRegion;
 
     @Bean
     public IntegrationFlow rabbitMqFlow(ConnectionFactory rabbitConnectionFactory) {
@@ -47,7 +49,7 @@ public class RouteIntegrationConfig {
     public MessageChannel loggingChannel() {
         return MessageChannels
                 .publishSubscribe()
-                .datatype(TenantAppMessage.class)
+                .datatype(TenantAppMessage.Message.class)
                 .get();
     }
 
@@ -74,22 +76,17 @@ public class RouteIntegrationConfig {
 
     @Bean
     public RouteKeyTransformer routingKeyTransformer() {
-        return new RouteKeyTransformer(smsTextParser(), tenantRouteResolver(propertyResolverRouting()), phoneNumberParser(propertyResolverRouting()));
+        return new RouteKeyTransformer(smsTextParser(), tenantRouteResolver(), defaultPhoneRegion);
     }
 
     @Bean
-    public TenantRouteResolver tenantRouteResolver(PropertyResolverRouting propertyResolverRouting) {
-        return new SpringTenantRouteResolver(propertyResolverRouting);
+    public TenantRouteResolver tenantRouteResolver() {
+        return new SpringTenantRouteResolver();
     }
 
     @Bean
     public SmsTextParser smsTextParser() {
         return new SimpleSmsTextParser();
-    }
-
-    @Bean
-    public PhoneNumberParser phoneNumberParser(PropertyResolverRouting propertyResolverRouting) {
-        return new PhoneNumberParserImpl(propertyResolverRouting);
     }
 
     @Bean
@@ -101,10 +98,4 @@ public class RouteIntegrationConfig {
     public ErrorLogHandler errorLogHandler(){
         return new ErrorLogHandler();
     }
-
-    @Bean
-    public PropertyResolverRouting propertyResolverRouting() {
-        return new PropertyResolverRouting();
-    }
-
 }

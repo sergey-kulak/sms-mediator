@@ -1,8 +1,9 @@
-smsmediator:
+msg-routing:
   inbound-queue: testSmsQueue
+  default-phone-region: FI
 
-  # routing
-  routing:
+  # routing mapping
+  mapping:
     K1:
       tenant: k1-tenant-new
       app: K1 app new
@@ -12,6 +13,3 @@ smsmediator:
     K3:
       tenant: k3-tenant
       app: K3 app
-    phone:
-      default:
-        region: FI

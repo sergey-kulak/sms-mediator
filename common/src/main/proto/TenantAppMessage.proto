@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package smsmediator.routing;
+
+option java_package = "fi.netorek.smsmediator.proto";
+option java_outer_classname = "TenantAppMessage";
+
+message Message {
+  string phoneNumber = 1;
+  string origin = 2;
+  string routeKey = 3;
+  string text = 4;
+  string tenant = 5;
+  string applicationName = 6;
+}

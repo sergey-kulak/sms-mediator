@@ -5,13 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.messaging.Message;
 
-import fi.netorek.smsmediator.msgrouting.msg.TenantAppMessage;
+import fi.netorek.smsmediator.proto.TenantAppMessage;
+
 
 public class SuccessTenantLogHandler {
     private static final Logger logger = LoggerFactory.getLogger(SuccessTenantLogHandler.class);
     private static final String TENANT_LOG_KEY = "tenant";
 
-    public void handle(Message<TenantAppMessage> message) {
+    public void handle(Message<TenantAppMessage.Message> message) {
         try {
             MDC.put(TENANT_LOG_KEY, message.getPayload().getTenant());
             logger.info(message.toString());

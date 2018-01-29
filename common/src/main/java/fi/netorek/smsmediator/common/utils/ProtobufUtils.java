@@ -9,6 +9,13 @@ public class ProtobufUtils {
     private ProtobufUtils() {
     }
 
+    /**
+     * Convert a Protobuf object to byte array
+     *
+     * @param message object for conversion
+     * @return byte array
+     * @throws fi.netorek.smsmediator.common.exception.IOException
+     */
     public static byte[] getBytes(MessageLite message) {
         try {
             ByteArrayOutputStream bout = new ByteArrayOutputStream();

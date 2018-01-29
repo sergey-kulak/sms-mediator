@@ -2,6 +2,11 @@ package fi.netorek.smsmediator.msgrouting.transform.sms;
 
 import fi.netorek.smsmediator.msgrouting.exception.IncorrectSmsTextFormatException;
 
+/**
+ * The parser to process sms text in following template: <br>
+ * &lt;logical routing key&gt;&lt;one or more spaces&gt;&lt;text itself&gt;<br>
+ * Example: "K1 Hello World"
+ */
 public class SimpleSmsTextParser implements SmsTextParser {
     private static final int TOKEN_LENGTH = 2;
 

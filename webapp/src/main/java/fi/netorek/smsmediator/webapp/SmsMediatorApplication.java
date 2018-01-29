@@ -14,14 +14,14 @@ public class SmsMediatorApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(getApplicationClasses());
+        return application.sources(getSpringBootApplicationClasses());
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(getApplicationClasses(), args);
+        SpringApplication.run(getSpringBootApplicationClasses(), args);
     }
 
-    private static Object[] getApplicationClasses() {
+    private static Object[] getSpringBootApplicationClasses() {
         Set<Class> applicationClasses =
                 AnnotationUtils.findAnnotatedClasses(BASE_PACKAGE, SpringBootApplication.class);
         return applicationClasses.toArray();

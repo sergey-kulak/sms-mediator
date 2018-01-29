@@ -9,9 +9,15 @@ import org.springframework.core.type.filter.AnnotationTypeFilter;
 
 public final class AnnotationUtils {
     private AnnotationUtils() {
-
     }
 
+    /**
+     * Scan a package and its all sub-packages to find all classes annotated with specified annotation
+     *
+     * @param scanPackage    package to scan
+     * @param annotationType annotation for search
+     * @return set of classes matched annotation search
+     */
     public static Set<Class> findAnnotatedClasses(String scanPackage, Class<? extends Annotation> annotationType) {
         ClassPathScanningCandidateComponentProvider provider
                 = new ClassPathScanningCandidateComponentProvider(false);
